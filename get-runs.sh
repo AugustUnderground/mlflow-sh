@@ -21,7 +21,7 @@ done
 shift $((OPTIND-1))
 [ "${1:-}" = "--" ] && shift
 
-DATA='{"experiment_ids": ["165"]}'
+DATA="{\"experiment_ids\": [\"$EXP_ID\"]}"
 HEAD="Content-Type: application/json"
 
 URL="http://$HOST:$PORT/$GET_RUNS"
