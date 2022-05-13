@@ -23,8 +23,11 @@ printf "Downloading all runs of Experiment $EXP_ID\n"
 
 RUNS=$(./get-runs.sh -h "$HOST" -p "$PORT" -e "$EXP_ID")
 
+mkdir -v "./metrics/$EXP_ID"
+
 for RUN in $RUNS; do
     printf "\tDownloading $RUN from $EXP_ID ..."
     ./get-all-metrics.sh -h "$HOST" -p "$PORT" -r "$RUN"
     printf "\e[1;32m 🗸\e[0m\n"
+    mv -v "./$RUN" "./metrics/$EXP_ID/"
 done
