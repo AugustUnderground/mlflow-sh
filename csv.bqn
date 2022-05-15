@@ -1,0 +1,10 @@
+rest ← 1 ⊑ •args # "./steps.csv"
+base ← 0 ⊑ •args # "../acid-paper/acid/dat/281/"
+runs ← •file.List base
+path ← (∾⋈⟜"/reward.csv")¨(∾base⊸⋈)¨runs
+data ← •Flines¨(•file.Exists¨path)/path
+indx ← {"reward" (⊑∘⊐⟜<)˜ (•BQN¨(','⊸((⊢-˜+`×¬)∘=⊔⊢) 0 ⊑ 𝕩)) } ¨ data
+rews ← indx { 𝕨 ⊑¨(•BQN⚇1(','⊸((⊢-˜+`×¬)∘=⊔⊢))¨ 1↓ 𝕩 ) } ¨ data
+targ ← { ≠¨(0⊸((⊢-˜+`×¬)∘=⊔⊢)) 𝕩 } ¨ rews
+line ← ',' {1⊸↓ ∾𝕨⊸∾¨𝕩}¨(•Fmt⚇0 targ)
+rest •FLines line
