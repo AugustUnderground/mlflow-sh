@@ -1,7 +1,5 @@
 rest ← 1 ⊑ •args # "./steps.csv"
 base ← 0 ⊑ •args # "../acid-paper/acid/dat/281/"
-rest ← "./steps.csv"
-base ← "../acid-paper/acid/dat/281/"
 runs ← •file.List base
 path ← (∾⋈⟜"/reward.csv")¨(∾base⊸⋈)¨runs
 data ← •Flines¨(•file.Exists¨path)/path
