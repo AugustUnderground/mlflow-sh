@@ -10,7 +10,8 @@ maxi ← ⊑∨≠¨targ
 padc ← maxi⊸-≠¨targ
 zero ← { 𝕩 ⥊ 0 } ¨ padc # coms ← { 𝕩 ⥊ ',' } ¨ padc
 fill ← targ∾¨zero       # fill ← line∾¨coms
-cols ← <˘⍉>fill
+mean ← (+˝÷≠)>fill
+cols ← <˘⍉>(⟨mean⟩∾fill)
 line ← ',' {1⊸↓ ∾𝕨⊸∾¨𝕩}¨(•Fmt⚇0 cols)
-head ← ⋈∾(','(1↓·⥊≍˘)runs)
+head ←  ⋈∾(','(1↓·⥊≍˘) (⟨"Mean"⟩ ∾ runs))
 rest •FLines (head ∾ line)
