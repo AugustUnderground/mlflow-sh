@@ -1,17 +1,17 @@
-rest ← 1 ⊑ •args # "./steps.csv"
-base ← 0 ⊑ •args # "../acid-paper/acid/dat/281/"
+rest ← 1 ⊑ •args
+base ← 0 ⊑ •args
+#rest ← "./steps.csv"
+#base ← "./metrics/169/"
 runs ← •file.List base
 path ← (∾⋈⟜"/reward.csv")¨(∾base⊸⋈)¨runs
 data ← •Flines¨(•file.Exists¨path)/path
 indx ← {"reward" (⊑∘⊐⟜<)˜ (•BQN¨(','⊸((⊢-˜+`×¬)∘=⊔⊢) 0 ⊑ 𝕩)) } ¨ data
 rews ← indx { 𝕨 ⊑¨(•BQN⚇1(','⊸((⊢-˜+`×¬)∘=⊔⊢))¨ 1↓ 𝕩 ) } ¨ data
 targ ← { ≠¨(0⊸((⊢-˜+`×¬)∘=⊔⊢)) 𝕩 } ¨ rews
-maxi ← ⊑∨≠¨targ
-padc ← maxi⊸-≠¨targ
-zero ← { 𝕩 ⥊ 0 } ¨ padc # coms ← { 𝕩 ⥊ ',' } ¨ padc
-fill ← targ∾¨zero       # fill ← line∾¨coms
-mean ← (+˝÷≠)>fill
-cols ← <˘⍉>(⟨mean⟩∾fill)
-line ← ',' {1⊸↓ ∾𝕨⊸∾¨𝕩}¨(•Fmt⚇0 cols)
+padd ← 1 + (⌈´≠¨targ)⊸↑ ¨ targ
+rows ← =⊸{<⎉ 𝕨 ⍉⍟ 𝕨 > 𝕩} padd
+mean ← (+´÷≠) ¨ rows
+line ← mean ∾¨ rows
+stln ← ',' {1⊸↓ ∾𝕨⊸∾¨𝕩}¨(•Fmt⚇0 line)
 head ←  ⋈∾(','(1↓·⥊≍˘) (⟨"Mean"⟩ ∾ runs))
-rest •FLines (head ∾ line)
+rest •FLines (head ∾ stln)
