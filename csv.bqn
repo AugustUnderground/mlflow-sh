@@ -12,7 +12,8 @@ targ ← { ≠¨(0⊸((⊢-˜+`×¬)∘=⊔⊢)) 𝕩 } ¨ rews
 padd ← 1 + (⌈´≠¨targ)⊸↑ ¨ targ
 rows ← =⊸{<⎉ 𝕨 ⍉⍟ 𝕨 > 𝕩} padd
 mean ← (+´÷≠) ¨ rows
-line ← mean ∾¨ rows
+step ← +`mean
+line ← step ∾¨ mean ∾¨ rows
 stln ← ',' {1⊸↓ ∾𝕨⊸∾¨𝕩}¨(•Fmt⚇0 line)
-head ←  ⋈∾(','(1↓·⥊≍˘) (⟨"Mean"⟩ ∾ envs))
+head ←  ⋈∾(','(1↓·⥊≍˘) (⟨"Step", "Mean"⟩ ∾ envs))
 rest •FLines (head ∾ stln)
